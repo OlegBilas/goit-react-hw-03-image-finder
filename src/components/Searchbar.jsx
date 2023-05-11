@@ -1,0 +1,38 @@
+import React from 'react';
+import { Formik, Field, Form } from 'formik';
+import PropTypes from 'prop-types';
+
+const initialValues = {
+  guery: '',
+};
+
+function Searchbar({ onSummit }) {
+  return (
+    <header className="Searchbar">
+      <Formik
+        initialValues={initialValues}
+        onSubmit={({ guery }) => onSummit(guery)}
+      >
+        <Form className="SearchForm">
+          <button type="submit" className="SearchForm-button">
+            <span className="SearchForm-button-label">Search</span>
+          </button>
+
+          <Field
+            className="SearchForm-input"
+            type="text"
+            name="query"
+            autoComplete="off"
+            autoFocus
+            placeholder="Search images and photos"
+          />
+        </Form>
+      </Formik>
+    </header>
+  );
+}
+Searchbar.propTypes = {
+  onSummit: PropTypes.func.isRequired,
+};
+
+export default Searchbar;
