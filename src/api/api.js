@@ -23,4 +23,4 @@ const fetchImages = async (query, page) => {
   }));
 };
 
-export default { fetchImage };
+export default { fetchImages };
