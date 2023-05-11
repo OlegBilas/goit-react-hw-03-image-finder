@@ -3,7 +3,7 @@ import { Formik, Field, Form } from 'formik';
 import PropTypes from 'prop-types';
 
 const initialValues = {
-  guery: '',
+  query: '',
 };
 
 function Searchbar({ onSummit }) {
@@ -11,7 +11,7 @@ function Searchbar({ onSummit }) {
     <header className="Searchbar">
       <Formik
         initialValues={initialValues}
-        onSubmit={({ guery }) => onSummit(guery)}
+        onSubmit={({ query }) => onSummit(query)}
       >
         <Form className="SearchForm">
           <button type="submit" className="SearchForm-button">
