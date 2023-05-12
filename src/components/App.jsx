@@ -18,7 +18,7 @@ export class App extends Component {
   };
 
   handleSubmit = query => {
-    this.setState({ query });
+    this.setState({ query, page: 1 });
   };
 
   handleClickLoadMore = () => {
@@ -30,10 +30,6 @@ export class App extends Component {
   componentDidUpdate(prevProps, prevState) {
     let { query, page } = this.state;
 
-    if (prevState.query !== query) {
-      //новий запит
-      page = 1;
-    }
     if (prevState.query !== query || prevState.page !== page) {
       this.setState({ status: 'pending' });
       fetchImages(query, page)
@@ -43,8 +39,7 @@ export class App extends Component {
           }
 
           if (prevState.query === query) {
-            console.log('prevState.query', prevState.query);
-            console.log('query', this.state.query);
+            // запит по тому ж самому ключовому слову
             images = [...prevState.images, ...images];
           }
 
