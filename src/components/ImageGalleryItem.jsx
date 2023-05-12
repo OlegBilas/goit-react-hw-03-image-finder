@@ -6,7 +6,8 @@ export default class ImageGalleryItem extends Component {
     showModal: false,
   };
 
-  toggleModal = () => this.setState(state => ({ showModal: !state.showModal }));
+  toggleModal = () =>
+    this.setState(prevState => ({ showModal: !prevState.showModal }));
 
   render() {
     const { id, webformatURL, largeImageURL } = this.props.Card;

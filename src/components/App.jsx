@@ -18,12 +18,16 @@ export class App extends Component {
   };
 
   handleSubmit = query => {
-    this.setState({ query, page: 1 });
+    this.setState(prevState => {
+      if (prevState.query !== query) {
+        return { query, page: 1 };
+      }
+    });
   };
 
   handleClickLoadMore = () => {
-    this.setState(state => {
-      return { page: state.page + 1 };
+    this.setState(prevState => {
+      return { page: prevState.page + 1 };
     });
   };
 

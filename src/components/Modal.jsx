@@ -10,14 +10,6 @@ export default class Modal extends Component {
     onClick: PropTypes.func.isRequired,
   };
 
-  componentDidMount() {
-    window.addEventListener('keydown', this.hadlePressEsc);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('keydown', this.hadlePressEsc);
-  }
-
   hadleOverlayClick = event => {
     if (event.currentTarget === event.target) {
       this.props.onClick();
@@ -29,6 +21,14 @@ export default class Modal extends Component {
       this.props.onClick();
     }
   };
+
+  componentDidMount() {
+    window.addEventListener('keydown', this.hadlePressEsc);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.hadlePressEsc);
+  }
 
   render() {
     const { LargeImage } = this.props;
