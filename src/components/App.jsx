@@ -49,13 +49,12 @@ export class App extends Component {
 
           this.setState({
             images,
-            page,
             status: 'resolved',
           });
         })
         .catch(() => {
           this.setState({ status: 'rejected' });
-          toast.warn("We didn't find any images about your request!");
+          toast.warn("We didn't find any images on your request!");
         });
     }
   }
