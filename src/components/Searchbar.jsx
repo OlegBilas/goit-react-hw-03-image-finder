@@ -1,6 +1,7 @@
 import React from 'react';
 import { Formik, Field, Form } from 'formik';
 import PropTypes from 'prop-types';
+import { ReactComponent as Search } from '../images/search.svg';
 
 const initialValues = {
   query: '',
@@ -15,7 +16,7 @@ function Searchbar({ onSummit }) {
       >
         <Form className="SearchForm">
           <button type="submit" className="SearchForm-button">
-            <span className="SearchForm-button-label">Search</span>
+            <Search className="SearchForm-button-label" />
           </button>
 
           <Field

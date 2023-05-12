@@ -41,14 +41,27 @@ export class App extends Component {
           if (images.length === 0) {
             return Promise.reject();
           }
-          return this.setState({ images, page, status: 'resolved' });
+
+          if (prevState.query === query) {
+            console.log('prevState.query', prevState.query);
+            console.log('query', this.state.query);
+            images = [...prevState.images, ...images];
+          }
+
+          this.setState({
+            images,
+            page,
+            status: 'resolved',
+          });
         })
-        .catch(() => this.setState({ status: 'rejected' }));
+        .catch(() => {
+          this.setState({ status: 'rejected' });
+          toast.warn("We didn't find any images about your request!");
+        });
     }
   }
   render() {
     const { status, images } = this.state;
-    toast.warn("We didn't find any images about your request!");
     return (
       <>
         <Searchbar className="Searchbar" onSummit={this.handleSubmit} />

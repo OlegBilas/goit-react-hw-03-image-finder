@@ -93,14 +93,14 @@ img {
 }
 
 .SearchForm-button-label {
-  position: absolute;
+  /* position: absolute;
   width: 1px;
-  height: 1px;
+  height: 1px; */
   padding: 0;
   overflow: hidden;
-  clip: rect(0, 0, 0, 0);
+  /* clip: rect(0, 0, 0, 0); */
   white-space: nowrap;
-  clip-path: inset(50%);
+  /* clip-path: inset(50%); */
   border: 0;
 }
 
@@ -208,4 +208,15 @@ img {
 .Button:hover,
 .Button:focus {
   background-color: #303f9f;
+}
+
+.Loader {
+  /* position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); */
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
