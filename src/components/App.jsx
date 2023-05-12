@@ -17,15 +17,12 @@ export class App extends Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.query !== this.state.query) {
+    const { query, page } = this.state;
+    if (prevState.query !== query) {
       this.setState({ status: 'pending' });
-
-      const { query, page } = this.state;
-      if (prevState.query !== query) {
-        fetchImages(query, page)
-          .then(images => this.setState({ images, status: 'resolved' }))
-          .catch(() => this.setState({ status: 'rejected' }));
-      }
+      fetchImages(query, page)
+        .then(images => this.setState({ images, status: 'resolved' }))
+        .catch(() => this.setState({ status: 'rejected' }));
     }
   }
   render() {

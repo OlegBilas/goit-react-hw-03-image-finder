@@ -13,12 +13,14 @@ function ImageGallery({ Images }) {
   );
 }
 
-ImageGallery.propTypes = PropTypes.arrayOf(
-  PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    webformatURL: PropTypes.string.isRequired,
-    largeImageURL: PropTypes.string.isRequired,
-  })
-);
+ImageGallery.propTypes = {
+  Images: PropTypes.arrayOf(
+    PropTypes.exact({
+      id: PropTypes.number.isRequired,
+      webformatURL: PropTypes.string.isRequired,
+      largeImageURL: PropTypes.string.isRequired,
+    })
+  ),
+};
 
 export default ImageGallery;

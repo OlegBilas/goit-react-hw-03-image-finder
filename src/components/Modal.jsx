@@ -1,29 +1,44 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 
 const rootModal = document.getElementById('root-modal');
-createPortal(Modal, rootModal);
 
-function Modal({ LargeImage, onClick }) {
-  return (
-    <div className="Overlay" onClick={() => hadleOverlayClick(onClick)}>
-      <div className="Modal">
-        <img src={LargeImage} alt="" />
-      </div>
-    </div>
-  );
-}
+export default class Modal extends Component {
+  static propTypes = {
+    LargeImage: PropTypes.string.isRequired,
+    onClick: PropTypes.func.isRequired,
+  };
 
-function hadleOverlayClick(event, onClickFromParent) {
-  if (event.currentTarget === event.target) {
-    onClickFromParent();
+  componentDidMount() {
+    window.addEventListener('keydown', this.hadlePressEsc);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.hadlePressEsc);
+  }
+
+  hadleOverlayClick = event => {
+    if (event.currentTarget === event.target) {
+      this.props.onClick();
+    }
+  };
+
+  hadlePressEsc = event => {
+    if (event.code === 'Escape') {
+      this.props.onClick();
+    }
+  };
+
+  render() {
+    const { LargeImage } = this.props;
+    return createPortal(
+      <div className="Overlay" onClick={this.hadleOverlayClick}>
+        <div className="Modal">
+          <img src={LargeImage} alt="" />
+        </div>
+      </div>,
+      rootModal
+    );
   }
 }
-
-Modal.propTypes = {
-  LargeImage: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
-};
-
-export default Modal;
