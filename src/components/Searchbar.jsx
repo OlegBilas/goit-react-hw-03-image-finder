@@ -16,7 +16,7 @@ function Searchbar({ onSummit }) {
       >
         <Form className="SearchForm">
           <button type="submit" className="SearchForm-button">
-            <Search className="SearchForm-button-label" />
+            <Search />
           </button>
 
           <Field

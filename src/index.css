@@ -92,18 +92,6 @@ img {
   opacity: 1;
 }
 
-.SearchForm-button-label {
-  /* position: absolute;
-  width: 1px;
-  height: 1px; */
-  padding: 0;
-  overflow: hidden;
-  /* clip: rect(0, 0, 0, 0); */
-  white-space: nowrap;
-  /* clip-path: inset(50%); */
-  border: 0;
-}
-
 .SearchForm-input {
   display: inline-block;
   width: 100%;
@@ -211,10 +199,6 @@ img {
 }
 
 .Loader {
-  /* position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); */
   height: 100vh;
   display: flex;
   justify-content: center;
