@@ -70,7 +70,7 @@ export class App extends Component {
         })
         .catch(() => {
           this.setState({ status: STATUS.REJECTED });
-          toast.warn(
+          toast.error(
             `We didn't find any images on your request by key "${query}"!`
           );
         });
