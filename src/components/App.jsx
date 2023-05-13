@@ -52,7 +52,9 @@ export class App extends Component {
 
           if (images.length === 0 && page > 1) {
             // кінець колекції
-            toast.warn("It's the end of the collection on your request!");
+            toast.warn(
+              `It's the end of the collection on your request by key "${query}"!`
+            );
             return this.setState({ status: STATUS.REJECTED });
           }
 
@@ -68,7 +70,9 @@ export class App extends Component {
         })
         .catch(() => {
           this.setState({ status: STATUS.REJECTED });
-          toast.warn("We didn't find any images on your request!");
+          toast.warn(
+            `We didn't find any images on your request by key "${query}"!`
+          );
         });
     }
   }
