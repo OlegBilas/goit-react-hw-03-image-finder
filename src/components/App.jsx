@@ -9,12 +9,19 @@ import Loader from './Loader';
 import ImageGallery from './ImageGallery';
 import Button from './Button';
 
+const STATUS = {
+  IDLE: 'idle',
+  PENDING: 'pending',
+  RESOLVED: 'resolved',
+  REJECTED: 'rejected',
+};
+
 export class App extends Component {
   state = {
     query: '',
     page: 1,
     images: [],
-    status: 'idle',
+    status: STATUS.IDLE,
   };
 
   handleSubmit = query => {
@@ -35,11 +42,18 @@ export class App extends Component {
     let { query, page } = this.state;
 
     if (prevState.query !== query || prevState.page !== page) {
-      this.setState({ status: 'pending' });
+      this.setState({ status: STATUS.PENDING });
       fetchImages(query, page)
         .then(images => {
-          if (images.length === 0) {
+          if (images.length === 0 && page === 1) {
+            // нічого не знайдено по запиту
             return Promise.reject();
+          }
+
+          if (images.length === 0 && page > 1) {
+            // кінець колекції
+            toast.warn("It's the end of the collection on your request!");
+            return this.setState({ status: STATUS.REJECTED });
           }
 
           if (prevState.query === query) {
@@ -49,11 +63,11 @@ export class App extends Component {
 
           this.setState({
             images,
-            status: 'resolved',
+            status: STATUS.RESOLVED,
           });
         })
         .catch(() => {
-          this.setState({ status: 'rejected' });
+          this.setState({ status: STATUS.REJECTED });
           toast.warn("We didn't find any images on your request!");
         });
     }
@@ -63,12 +77,12 @@ export class App extends Component {
     return (
       <>
         <Searchbar className="Searchbar" onSummit={this.handleSubmit} />
-        {status === 'pending' && <Loader />}
-        {status === 'resolved' && <ImageGallery Images={images} />}
-        {images.length !== 0 && status === 'resolved' && (
+        {status === STATUS.PENDING && <Loader />}
+        {images.length !== 0 && <ImageGallery Images={images} />}
+        {status === STATUS.RESOLVED && (
           <Button onClick={this.handleClickLoadMore} />
         )}
-        {status === 'rejected' && <ToastContainer />}
+        {status === STATUS.REJECTED && <ToastContainer />}
       </>
     );
   }
